@@ -1,0 +1,18 @@
+.container {
+  padding: 1rem;
+}
+
+.buttons {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.buttons button {
+	margin: 1rem;
+}
+
+.buttons button a {
+	text-decoration: none;
+	color: inherit;
+}
