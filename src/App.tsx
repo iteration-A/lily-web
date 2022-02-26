@@ -9,8 +9,6 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import AppPage from "./pages/App";
 
-// TODO:
-// protected routes
 function App() {
   return (
     <div>

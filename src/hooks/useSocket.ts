@@ -39,7 +39,7 @@ const useSocket = () => {
     _socket.connect();
     _socket.onOpen(() => {
       console.log("socket connected");
-      setSocket(socket);
+      setSocket(_socket);
     });
     _socket.onError(() => {
       setSocketError("An error ocurred while connecting to the server");
