@@ -2,10 +2,11 @@ import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
 import Typography from "@mui/material/Typography";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { useSnackbar } from "notistack";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import loginSchema from "../yup/login";
 import axios from "../lib/axios";
 import styles from "./Login.module.css";
+import { useEffect } from "react";
 
 type LoginFormData = {
   username: string;
@@ -14,6 +15,13 @@ type LoginFormData = {
 const Login = () => {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const navigate = useNavigate();
+  const { state } = useLocation();
+  useEffect(() => {
+    const error = (state as any)?.error;
+    if (!error) return;
+    closeSnackbar();
+    enqueueSnackbar(error, { variant: "error" });
+  }, []);
 
   const submitHandler = (
     data: LoginFormData,
@@ -51,20 +59,38 @@ const Login = () => {
         {({ isSubmitting }) => (
           <Form>
             <div>
-							<label htmlFor="username">Username</label>
-              <Field className={styles.input} type="text" id="username" name="username" />
-              <ErrorMessage className={styles.error} name="username" component="div" />
+              <label htmlFor="username">Username</label>
+              <Field
+                className={styles.input}
+                type="text"
+                id="username"
+                name="username"
+              />
+              <ErrorMessage
+                className={styles.error}
+                name="username"
+                component="div"
+              />
             </div>
 
             <div>
-							<label htmlFor="password">Password</label>
-              <Field className={styles.input} type="password" id="password" name="password" />
-              <ErrorMessage className={styles.error} name="password" component="div" />
+              <label htmlFor="password">Password</label>
+              <Field
+                className={styles.input}
+                type="password"
+                id="password"
+                name="password"
+              />
+              <ErrorMessage
+                className={styles.error}
+                name="password"
+                component="div"
+              />
             </div>
 
             <LoadingButton
-							color="primary"
-							variant="contained"
+              color="primary"
+              variant="contained"
               type="submit"
               disabled={isSubmitting}
               loading={isSubmitting}
