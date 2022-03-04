@@ -8,7 +8,7 @@ type User = {
   last_name: string;
 };
 const useUser = () => {
-  const [user, setUser] = useState<null | User>();
+  const [user, setUser] = useState<User>();
   const [error, setError] = useState<string>();
   const [loading, setLoading] = useState(true);
 

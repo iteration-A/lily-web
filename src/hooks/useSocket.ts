@@ -34,7 +34,7 @@ const useSocket = () => {
     if (!socketToken) return;
     const _socket = new Socket(
       `${process.env.REACT_APP_API_URL_FOR_SOCKET}/socket`,
-      { params: { token: socketToken } }
+      { params: { token: socketToken }, logger: console.log }
     );
     _socket.connect();
     _socket.onOpen(() => {

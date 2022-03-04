@@ -1,8 +1,9 @@
 import { Navigate } from "react-router-dom";
 import useUser from "../hooks/useUser";
+import UserContext from "../contexts/userContext";
 
 const PrivatePage = ({ children }: { children: JSX.Element }) => {
-  const [_user, loading, error] = useUser();
+  const [user, loading, error] = useUser();
 
   if (loading) return null;
 
@@ -10,7 +11,7 @@ const PrivatePage = ({ children }: { children: JSX.Element }) => {
     return <Navigate to="/login" state={{ error }} replace />;
   }
 
-  return children;
+  return <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>;
 };
 
 export default PrivatePage;
